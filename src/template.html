@@ -1,0 +1,112 @@
+<html>
+
+<head>
+    <style>
+        * {
+            font-size: 18px;
+            box-sizing: content-box;
+            font-family: italic oblique;
+            font-style: italic;
+        }
+
+        #water-marker {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            width: 800px;
+            height: 45px;
+        }
+
+        .secondary-text {
+            color: rgb(128, 128, 128);
+            font-size: 14px;
+        }
+
+        .two-row {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="water-marker">
+        <div class="two-row">
+            <div id="Model"></div>
+            <div id="LensModel" class="secondary-text"></div>
+        </div>
+        <div>
+            <div id="extraContent"></div>
+        </div>
+        <div style="display: flex; gap: 10px">
+            <div style="display: flex; align-items: center;">
+                <img id="logo" style="height: 48px; width: 48px;" />
+            </div>
+            <div style="height: 100%; width: 1px; background-color: gray;"></div>
+            <div class="two-row">
+                <div style="display: flex; gap: 10px">
+                    <div style="display: flex;">
+                        <div id="FocalLengthIn35mmFilm"></div>
+                        <div>mm</div>
+                    </div>
+                    <div id="FNumber"></div>
+                    <div style="display: flex;">
+                        <div>ISO</div>
+                        <div id="ISOSpeedRatings"></div>
+                    </div>
+                </div>
+                <div id="DateTimeOriginal" class="secondary-text"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.LogoMap = {
+            'NIKON': 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGhlaWdodD0iNTEycHgiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB3aWR0aD0iNTEycHgiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxnIGlkPSLlvaLnirZfMV81XyIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAgICA7Ij48ZyBpZD0i5b2i54q2XzEiPjxnPjxyZWN0IGhlaWdodD0iNDAwLjA0NyIgc3R5bGU9ImZpbGwtcnVsZTpldmVub2RkO2NsaXAtcnVsZTpldmVub2RkO2ZpbGw6I0ZGRTEwMDsiIHdpZHRoPSI0MDAuMDQxIiB4PSI1NS45NzkiIHk9IjU1Ljk3NyIvPjwvZz48L2c+PC9nPjxnIGlkPSLlvaLnirZfMV80XyIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAgICA7Ij48ZyBpZD0i5b2i54q2XzFfMV8iPjxnPjxwYXRoIGQ9Ik01NS45NzksNDEzLjA5NnYzMS4zODMgICAgIGMxNS4wMy00LjEzNCwzMC4wNTEtOC40MTcsNDUuMDU0LTEyLjg2MmM4OC43NjItMjYuMjQ5LDE3NC44NzItNTcuMTY1LDI1OC4wNDYtOTIuMzY5ICAgICBjLTg4Ljk1OSwxNS42OTEtMTc4LjAwOSwzNi41NTctMjY2LjgwNyw2Mi44MTdDODAuMTQxLDQwNS42NTQsNjguMDM3LDQwOS4zNDUsNTUuOTc5LDQxMy4wOTZ6IE01NS45ODIsMzczLjgzNXYyNi4zODggICAgIGMyNy4wMTUtNy43NzEsNTQuMDEtMTYuMDYzLDgwLjk3OS0yNC44MmM4NS4wOTktMjcuNjk3LDE2Ny42MzctNTkuNDUzLDI0Ny4zNjgtOTQuOTgzICAgICBjLTg1LjM4MiwxOC4xNTItMTcwLjgsNDAuOTc4LTI1NS45NDYsNjguNjU3QzEwNC4wNDMsMzU3LjAwOCw3OS44OTksMzY1LjI1MSw1NS45ODIsMzczLjgzNXogTTU1Ljk3OSwzMzguOTcydjIxLjU0OCAgICAgYzM4LjQ0MS0xMS43MDEsNzYuODQ5LTI0LjM4MywxMTUuMTQ2LTM4LjAyOGM4MS43ODEtMjkuMTUxLDE2MC45NDgtNjIuMDA3LDIzNy4zOTEtOTguMjUgICAgIGMtODIuMTE2LDIwLjI3Ni0xNjQuMjMzLDQ0LjkyNS0yNDYuMDE0LDc0LjA5NUMxMjYuNDk3LDMxMS4xNjcsOTAuOTg2LDMyNC43MDcsNTUuOTc5LDMzOC45NzJ6IE01NS45ODIsMzA4LjcyOXYxNS44MDIgICAgIGM0OS4zMDEtMTUuODk1LDk4LjU0My0zMy40MDEsMTQ3LjYxNy01Mi41MTdjNzguNjAyLTMwLjY2NSwxNTQuNjg2LTY0LjY1NSwyMjguMDA4LTEwMS42NiAgICAgQzM1Mi41OSwxOTIuNzk0LDI3My41OSwyMTkuMjcsMTk0Ljk4OSwyNDkuOTFDMTQ3LjcxOCwyNjguMzI2LDEwMS4zOCwyODcuOTY2LDU1Ljk4MiwzMDguNzI5eiBNNTUuOTgyLDI4Mi45MDR2OS4zMjMgICAgIGM1OS43MDUtMjAuNTM5LDExOS4yODktNDMuNDA2LDE3OC42MjUtNjguNjcyYzc1LjY0Mi0zMi4xNjUsMTQ4Ljc4MS02Ny4zMjUsMjE5LjI2Ni0xMDUuMTg2ICAgICBjLTc2LjEzNSwyNC41OTMtMTUyLjE3OSw1Mi45MTQtMjI3Ljc5Miw4NS4xMUMxNjcuODc1LDIyOC4yMzcsMTExLjE2MiwyNTQuNzU5LDU1Ljk4MiwyODIuOTA0eiBNMjU2LjE0NiwxNTguNjc4ICAgICBjLTY4LjkzMiwzMS45NzItMTM1LjY5OCw2Ni4yNzItMjAwLjE2NCwxMDIuNjQ2djIuMjM0YzY5Ljc0LTI1Ljc0NywxMzkuMzQ3LTU0LjY0MSwyMDguNTYxLTg2LjcyICAgICBjNjUuODQ1LTMwLjUzNSwxMjkuNzA2LTYzLjE5NywxOTEuNDc4LTk3Ljc4OXYtMy44NzNDMzg5LjE4MiwxMDAuMTMxLDMyMi40ODQsMTI3Ljk0MSwyNTYuMTQ2LDE1OC42Nzh6IE00MzMuODE0LDU1Ljk3N0g0MDkuOTQgICAgIGMtNDEuNzE0LDE4LjY2NS04My4zMjEsMzguNDUzLTEyNC43OSw1OS4zNmMtNzAuMjc0LDM1LjQzOC0xMzguMjEzLDczLjE0OS0yMDMuNjM2LDExMi44NzYgICAgIGM3MC44NDItMjguOTg4LDE0MS41NDItNjEuMTg1LDIxMS44NTUtOTYuNjI1QzM0MS4yOSwxMDcuNDI2LDM4OC4xMTEsODIuMjAyLDQzMy44MTQsNTUuOTc3eiBNMzc3LjUwOSw1NS45NzdoLTMyLjQ0NyAgICAgYy0xMC41ODksNS42NDUtMjEuMTQyLDExLjM0LTMxLjY5LDE3LjE0MmMtNjcuODIyLDM3LjE3LTEzMy4zNTYsNzYuMjYzLTE5Ni41MDMsMTE3LjA0MyAgICAgYzY4LjM2LTMxLjI2OSwxMzYuNTgtNjUuNDc0LDIwNC40MDItMTAyLjYyQzM0MC4xOTIsNzcuMTg3LDM1OC45MzksNjYuNjQ2LDM3Ny41MDksNTUuOTc3eiBNMzAwLjI4NSw1NS45NzcgICAgIGMtNTAuODMzLDMxLjIwMi0xMDAuMjgxLDYzLjM2Mi0xNDguMjk5LDk2LjM3MmM1OC44Ny0yOS45NjgsMTE3LjY3Ny02Mi4xMDQsMTc2LjE4NS05Ni4zNzJIMzAwLjI4NXogTTI2OS40OCw1NS45NzcgICAgIGMtMjcuODgyLDE5LjI4OS01NS4zMjIsMzguOC04Mi4yODcsNTguNTVjMzMuMzItMTguODU1LDY2LjYyNS0zOC4zNTYsOTkuODUtNTguNTVIMjY5LjQ4eiIgc3R5bGU9ImZpbGwtcnVsZTpldmVub2RkO2NsaXAtcnVsZTpldmVub2RkO2ZpbGw6I0ZGRkZGRjsiLz48L2c+PC9nPjwvZz48ZyBpZD0i5b2i54q2XzFfM18iIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgICAgOyI+PGcgaWQ9IuW9oueKtl8xXzJfIj48Zz48cGF0aCBkPSJNMTgwLjAyOSwzNjkuOTQxbC0xNS45MzYsNzEuNDc0aDI2LjE0MWwxNS45NDgtNzEuNDc0ICAgICBIMTgwLjAyOXogTTE5Ni4yMDUsMzY0LjQ2MmMxMS44NzIsMCwxNi40NjYtNy41OTgsMTYuNDY2LTEzLjMwNWMwLTMuODQ3LTMuMTI1LTEwLjQ2OS0xNC44NDctMTAuNDY5ICAgICBjLTEwLjc4MywwLTE2LjQ2LDcuMTktMTYuNDYsMTMuNTc5QzE4MS4zNjMsMzU2LjUzNSwxODEuODk5LDM2NC40NjIsMTk2LjIwNSwzNjQuNDYyeiBNMTQ2Ljg0MywzNDQuMDg2bC0xMS4xMzIsNDkuNTIxICAgICBsLTE4LjM5Ni00OS41NTdIOTAuNjgxbC0yMS43MjcsOTcuMzY1aDI2Ljc4OGMzLjA1Ny0xNS41ODksNy4xMy0zMi4wNTgsMTEuMTE4LTQ4Ljg5N2wxOC43NjksNDguODk3aDI1LjUxM2wyMS45ODQtOTcuMzI5ICAgICBIMTQ2Ljg0M3ogTTI5MC44NjksMzY5Ljg5OWgtMjkuNzcxbC0yMS41MDMsMjUuOTYybDExLjYxNC01MS43NzVoLTI2LjYzNWwtMjEuNTg2LDk3LjMyOWgyNS45NWw4LjcwNC0zNy4wMDVsMTAuOTUzLDM3LjAwNSAgICAgaDI2LjU3bC0xMS4wMTEtMzkuMDU3TDI5MC44NjksMzY5Ljg5OXogTTQzMi44MzUsMzY4Ljk4OWMtMTEuMTgxLTMuMzQ5LTI1LjA0MSwyLjE4NS0zMS44NjYsMTEuNjYgICAgIGMwLjY1OC0yLjkzOCwxLjM1OC02LjM1NCwyLjE2Ni0xMC4yODloLTI2LjUyNWwtMTUuNTE4LDcxLjA1NWgyNi40MDVsOC43OTQtNDAuMzAxYzEuNjI3LTcuNDA2LDcuNTkyLTEwLjU4MywxMi44NzMtOS4yMDcgICAgIGMyLjI3MywwLjYxNiw1LjQyLDIuMzMzLDQuMzczLDguNWwtOC45NTUsNDEuMDA4aDI2LjA4OGwxMS45NTItNTQuNzE4QzQ0NS4xNTksMzc0LjY0Myw0MzUuMjY0LDM2OS43MDEsNDMyLjgzNSwzNjguOTg5eiAgICAgIE0zMjcuNTc3LDM2Ni45MTRjLTQwLjI3NywwLTQ2LjEzNCwzMS4zOTUtNDcuMjY3LDM3LjExM2MtMi45NjIsMTQuNDgyLDAuMzA1LDMzLjI4NCwxOS4yMjYsMzguMjYyICAgICBjMTIuNDYxLDMuMjksMzEuOTg3LDIuOTM3LDQ0LjUyNC03LjMyOGMxMS40NjUtOS4zNjgsMTcuMTQzLTI1LjIwOSwxNi45NDgtNDAuMTEgICAgIEMzNjAuODE3LDM4MC41MTgsMzQ4LjY3NywzNjYuOTE0LDMyNy41NzcsMzY2LjkxNHogTTMzMC43MzYsMzkzLjc1NmMtMS4zNyw4LjkzMS00LjQ2OSwyMC4yODUtNS42MDMsMjMuODg3bC0wLjAzNiwwLjEyNSAgICAgYy0xLjI2MiwzLjk2Ny00Ljk4NSw2LjI2NC05LjM3LDYuMjY0Yy00LjQzMSwwLTcuMDk1LTIuNzgxLTYuNzMzLTYuMzUzYzAuNjczLTUuOTg5LDQuNDQ0LTIxLjEzNSw1LjUzOS0yNC4xMzkgICAgIGMxLjg5NC01LjIwNCw3LjAzOS02LjM1OCw5LjM3MS02LjM4MkMzMjkuNjY2LDM4Ny4xMjIsMzMxLjI1NCwzOTAuNTMxLDMzMC43MzYsMzkzLjc1NnoiIHN0eWxlPSJmaWxsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDtmaWxsOiMwRDBEMEQ7Ii8+PC9nPjwvZz48L2c+PC9zdmc+'
+        }
+    </script>
+    <script>
+        // [mock]
+        // window.Fields = {
+        //     Make: 'NIKON CORPORATION',
+        //     Model: 'NIKON Z 5',
+        //     DateTimeOriginal: '2023:10:21 11:24:02',
+        //     ExposureTime: '1/6400',
+        //     FNumber: 'f/1.8',
+        //     ISOSpeedRatings: 400,
+        //     ExposureBiasValue: '-1.6666666666666667',
+        //     FocalLength: '85 mm',
+        //     FocalLengthIn35mmFilm: 85,
+        //     Lens: 'Viltrox AF 85/1.8 Z',
+        //     LensModel: 'Viltrox AF 85/1.8 Z'
+        // }
+
+        if (window.Fields) {
+            const img = document.querySelector('#logo');
+            const make = window.Fields['Make'];
+            let logo = '';
+            window.LogoMap && Object.keys(window.LogoMap).forEach(key => {
+                if (make.includes(key)) {
+                    logo = window.LogoMap[key];
+                }
+            })
+
+            if (img && logo) {
+                img.src = logo;
+            }
+
+            Object.keys(window.Fields).forEach(key => {
+                const value = window.Fields[key];
+                const element = document.querySelector(`#${key}`);
+                if (!element) {
+                    return;
+                }
+
+                element.innerHTML = value;
+            })
+        }
+    </script>
+</body>
+
+</html>
